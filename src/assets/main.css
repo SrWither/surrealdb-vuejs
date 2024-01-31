@@ -1,0 +1,9 @@
+@layer primevue, tailwind, theme;
+
+@import 'tailwindcss/base.css' layer(tailwind);
+@import 'tailwindcss/components.css' layer(tailwind);
+@import 'tailwindcss/utilities.css' layer(tailwind);
+
+@import 'primevue/resources/themes/lara-dark-purple/theme.css' layer(theme);
+@import 'primevue/resources/primevue.min.css' layer(theme);
+@import 'primeicons/primeicons.css' layer(theme);
