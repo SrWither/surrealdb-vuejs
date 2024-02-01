@@ -52,7 +52,7 @@ export const updatePost = async (
       console.error('You are not authenticated')
       return null
     }
-    const [post] = await db.update<Post>(id, {
+    const [post] = await db.merge<Post>(id, {
       title,
       description,
       content,

@@ -55,7 +55,27 @@ const handleSubmit = async () => {
     return
   }
   if (postId.value) {
-    console.log('edit post: ', post)
+    const updatepost = await updatePost(
+      authStore.token || '',
+      postId.value,
+      post.title,
+      post.description,
+      post.content,
+      post.published
+    )
+
+    if (!updatepost) {
+      toast.add({ severity: 'error', summary: 'Post', detail: 'Error to update post', life: 3000 })
+      return
+    }
+
+    toast.add({
+      severity: 'success',
+      summary: 'Post',
+      detail: 'Post updated successfully',
+      life: 3000
+    })
+    router.push(`/post/${updatepost.id}`)
   } else {
     const newpost = await createPost(
       authStore.token || '',
@@ -67,7 +87,7 @@ const handleSubmit = async () => {
 
     if (!newpost) {
       toast.add({ severity: 'error', summary: 'Post', detail: 'Error to create post', life: 3000 })
-      return;
+      return
     }
 
     toast.add({
