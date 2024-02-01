@@ -19,7 +19,7 @@ export const AuthStore = defineStore('auth', {
   actions: {
     setToken(token: string): void {
       this.token = token
-      Cookies.set(COOKIE_KEY, token, { sameSite: 'None', secure: true })
+      Cookies.set(COOKIE_KEY, token)
     },
     clearToken(): void {
       this.token = null

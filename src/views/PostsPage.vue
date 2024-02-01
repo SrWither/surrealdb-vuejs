@@ -55,7 +55,7 @@ const formatDate = (date: Date) => {
         <h1 class="text-xl font-bold mb-2">{{ post.title }}</h1>
       </template>
       <template #content>
-        <p class="text-gray-400">{{ truncateText(post.description, 100) }}</p>
+        <p class="text-gray-400 min-h-12">{{ truncateText(post.description, 100) }}</p>
       </template>
       <template #footer>
         <div class="flex justify-between items-center mt-4">

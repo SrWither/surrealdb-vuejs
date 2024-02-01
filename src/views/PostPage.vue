@@ -83,7 +83,7 @@ const renderMarkdown = (markdown: string) => {
     
     <p class="mb-4 text-center text-zinc-500">{{ formatDate(post.updated_at) }}</p>
     
-    <div class="mx-24 text-lg">
+    <div class="lg:mx-20 md:mx-10 sm:mx-2 text-lg">
       <div v-if="!post.published" class="text-red-600 font-semibold text-center">
         <i class="pi pi-times"></i> Not Published
       </div>
