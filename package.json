@@ -13,10 +13,14 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@types/highlightjs": "^9.12.6",
     "@types/js-cookie": "^3.0.6",
     "autoprefixer": "^10.4.17",
+    "highlight.js": "^11.9.0",
     "js-cookie": "^3.0.5",
     "marked": "^11.2.0",
+    "marked-highlight": "^2.1.0",
+    "node-emoji": "^2.1.3",
     "pinia": "^2.1.7",
     "postcss": "^8.4.33",
     "primeicons": "^6.0.1",

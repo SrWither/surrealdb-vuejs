@@ -6,12 +6,14 @@ import Card from 'primevue/card'
 import Checkbox from 'primevue/checkbox'
 import { onBeforeMount, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { getPost, createPost, updatePost } from '@/api/posts'
+import { getPost, createPost, updatePost, deletePost } from '@/api/posts'
 import { AuthStore } from '@/stores/auth'
 import { authenticate } from '@/api/auth'
 import { useToast } from 'primevue/usetoast'
+import { useConfirm } from 'primevue/useconfirm'
 
 const toast = useToast()
+const confirm = useConfirm()
 const authStore = AuthStore()
 const route = useRoute()
 const router = useRouter()
@@ -99,6 +101,35 @@ const handleSubmit = async () => {
     router.push(`/post/${newpost.id}`)
   }
 }
+
+const confirmDelete = async (event: MouseEvent) => {
+  confirm.require({
+    target: event.currentTarget as HTMLElement,
+    message: 'Do you want to delete this post?',
+    icon: 'pi pi-info-circle',
+    rejectClass: 'p-button-secondary p-button-outlined p-button-sm',
+    acceptClass: 'p-button-danger p-button-sm',
+    rejectLabel: 'Cancel',
+    acceptLabel: 'Delete',
+    accept: () => {
+      const deletepost = deletePost(authStore.token || '', postId.value || '')
+      if (!deletepost) {
+        toast.add({
+          severity: 'error',
+          summary: 'Confirmed',
+          detail: 'Error to delete post',
+          life: 3000
+        })
+        return
+      }
+      toast.add({ severity: 'success', summary: 'Confirmed', detail: 'Post deleted', life: 3000 })
+      router.push('/posts')
+    },
+    reject: () => {
+      toast.add({ severity: 'warn', summary: 'Rejected', detail: 'No post deleted', life: 3000 })
+    }
+  })
+}
 </script>
 
 <template>
@@ -133,7 +164,7 @@ const handleSubmit = async () => {
               class="w-full p-2 border rounded"
               v-model="post.content"
               id="content"
-              rows="5"
+              rows="10"
               cols="30"
             />
           </div>
@@ -147,6 +178,13 @@ const handleSubmit = async () => {
             class="w-full p-2 bg-blue-500 text-white hover:bg-blue-600"
             :label="postId ? 'Edit Post' : 'Create Post'"
             type="submit"
+          />
+          <Button
+            v-if="postId"
+            @click="confirmDelete($event)"
+            class="w-full mt-4"
+            severity="danger"
+            label="Delete Post"
           />
         </form>
       </template>
