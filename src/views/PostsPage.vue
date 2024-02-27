@@ -62,6 +62,9 @@ const formatDate = (date: Date) => {
           <router-link :to="`/post/${post.id}`">
             <Button label="Read More" class="p-button-primary" />
           </router-link>
+          <div v-if="!post.published" class="text-red-600 font-semibold text-center">
+            <i class="pi pi-times"></i> Not Published
+          </div>
           <div class="text-gray-500">{{ formatDate(post.updated_at || new Date()) }}</div>
         </div>
       </template>

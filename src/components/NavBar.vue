@@ -34,6 +34,11 @@ const handleLogout = () => {
         </router-link>
         <Button label="Logout" icon="pi pi-user" text @click="handleLogout" />
       </div>
+      <div v-else>
+        <router-link to="/login">
+          <Button label="Login" icon="pi pi-user" text />
+        </router-link>
+      </div>
     </template>
   </Menubar>
 </template>
