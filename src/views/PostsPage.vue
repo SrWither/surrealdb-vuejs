@@ -17,10 +17,7 @@ const setupLive = async () => {
   const uuid = await db.live('Posts', async ({ action }) => {
     if (action === 'CLOSE') return
 
-    if (action === 'CREATE') {
-      posts.value = await getPosts()
-      console.log('Live Post!')
-    }
+    posts.value = await getPosts()
   })
   queryUuid.value = uuid
 }
